@@ -60,10 +60,11 @@ export class CPolkaStore {
             process.exit(1);
 
         // Retrieve the chain & node information information via rpc calls
-        const [chain, nodeName, nodeVersion] = await Promise.all([
+        const [chain, nodeName, nodeVersion, roles] = await Promise.all([
             this._api.rpc.system.chain(),
             this._api.rpc.system.name(),
-            this._api.rpc.system.version()
+            this._api.rpc.system.version(),
+            this._api.rpc.system.nodeRoles()
         ]);
 
         const ver = getPackageVersion();
@@ -76,6 +77,7 @@ export class CPolkaStore {
         console.log(`Node.js:     ${nodeVer.original}`);
         console.log(`Provider:    ${this._apiHandler.currentEndpoint}`);
         console.log(`API:         ${this._api.libraryInfo}\n`);
+        console.log(`Roles:       ${roles}\n`);
 
         if (chain.toString() != this._chain) {
             console.log('Wrong chain!\nGot "%s" chain, but expected "%s" chain.', chain.toString(), this._chain);

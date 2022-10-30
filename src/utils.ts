@@ -49,7 +49,7 @@ function ValidateConfigFile(config: any, schemaFile: string): any {
 // loads config.json and return config object
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function LoadConfigFile(): any {
-    const configFile = '../config/config.json';
+    const configFile = './config/config.json';
     // const configFile_tpl = './config/config_tpl.json'
 
     // first copy config from temlate, if not there
@@ -57,7 +57,7 @@ export function LoadConfigFile(): any {
     // fs.copyFileSync(configFile_tpl, configFile);
 
     const config = JSON.parse(fs.readFileSync(configFile, 'utf8'));
-    return ValidateConfigFile(config, '../schema/config.schema.json');
+    return ValidateConfigFile(config, './schema/config.schema.json');
 }
 
 export function GetNodeVersion(): INodeVersion {
